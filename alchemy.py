@@ -45,7 +45,8 @@ else:
                 st.write(f'## Here are the ingredients you can use to uncover the {name} effect of {ingredient}:')
                 filtered = effect_guide[effect_guide["name"] == name]
                 other_ingredients = filtered.drop(columns="name").iloc[:, :].dropna(axis=1).values[0].tolist()
-                other_ingredients.remove(ingredient)
+                if ingredient in other_ingredients:
+                    other_ingredients.remove(ingredient)
                 for other in other_ingredients:
                     st.write(f"- {other}")
                 
